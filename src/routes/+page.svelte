@@ -27,8 +27,6 @@
     </div>
 </main>
 
-<h1>Welcome to SvelteKit</h1>
-
 <style>
   .home { max-width: 800px; margin: 40px auto; font-family: system-ui, sans-serif; }
   header { display: flex; justify-content: space-between; align-items: center; }
