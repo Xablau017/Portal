@@ -1,17 +1,43 @@
 <script lang="ts">
     import {supabase} from '$lib/supabaseClient';
     import {goto} from '$app/navigation';
+    import { onMount } from 'svelte';
 
+    let email =$state('');
+    let role =$state('');
+
+    onMount(async () => {
+        const { data } = await supabase.auth.getUser();
+        email =data.user?.email ?? '';
+    
+
+    const userId = data.user?.id;
+    if (userId) {
+        const { data: perfil } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', userId)
+            .single()
+            if (perfil) role = perfil.role;
+    }
+    });
+        
+        
     async function sair() {
         await supabase.auth.signOut();
         goto('/login');
     }
+
 </script>
 
 <main class="home">
-    <header>
-        <h1> Portal GMR </h1>
-        <button on:click={sair}> Sair </button>
+    <header class="topo">
+        <div class="marca">Portal GMC</div>
+        <div class="usuario">
+            {#if email}<span>{email}</span>{/if}
+            {#if role}<span class="badge">{role}</span>{/if}
+        <button onclick={sair}> Sair </button>
+        </div>
     </header>
 
     <div class="blocos">

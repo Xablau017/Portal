@@ -2,7 +2,7 @@
 <script lang="ts">
   // Cole aqui o link de "Publicar na web" do seu Power BI.
   // Deixe como uma constante clara para achar e trocar fácil.
-  const POWER_BI_URL = 'https://app.powerbi.com/view?r=eyJrIjoiOTZmMzQ3YjUtMTQ5Yi00NmNlLWE4ZjctYTFiZmNiOTgyYjM5IiwidCI6ImU1NmNhMWJkLWI4NTktNGVkNy05OWQ2LThkYWU5MjI0MGM4NSJ9';
+  const POWER_BI_URL = 'https://app.powerbi.com/view?r=eyJrIjoiOTZmMzQ3YjUtMTQ5Yi00NmNlLWE4ZjctYTFiZmNiOTgyYjM5IiwidCI6ImU1NmNhMWJkLWI4NTktNGVkNy05OWQ2LThkYWU5MjI0MGM4NSJ9&embedImagePlaceholder=true&pageName=559f56b6f838c096b16d';
 </script>
 
 <main class="bi">

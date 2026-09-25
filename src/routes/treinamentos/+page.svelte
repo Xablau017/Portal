@@ -1,26 +1,45 @@
 <script lang="ts">
     import {supabase} from '$lib/supabaseClient';
     import { onMount } from 'svelte';
+
     type Training = {
         id: string;
         titulo: string;
         descricao: string;
         thumbnail_url: string;
+        area: string;
     };
 
     let videos: Training[] = $state([]);
     let carregando = $state(true);
 
     onMount(async () => {
-        const { data, error } = await supabase
-        .from('trainings')
-        .select('id, titulo, descricao, thumbnail_url')
-        .eq('publicado', true)
-        .order('ordem', {ascending: true});
 
-        if (!error && data) {
-            videos = data;
+        const { data: userData } = await supabase.auth.getUser();
+        const userId = userData.user?.id;
+
+        let role = 'colaborador';
+        if (userId) {
+            const { data: perfil } = await supabase
+                .from('profiles')
+                .select('role')
+                .eq('id', userId)
+                .single();
+                if (perfil) role =perfil.role;
         }
+
+        let query = supabase
+            .from('trainings')
+            .select('id, titulo, descricao, thumbnail_url, area')
+            .eq('publicado', true)
+            .order('ordem', {ascending: true});
+
+        if (role !== 'admin') {
+            query = query.or(`area.eq.${role}, area.eq.todos`);
+        }
+
+        const { data, error } = await query;
+        if (!error && data) videos = data; 
         carregando = false;
     });
 </script>

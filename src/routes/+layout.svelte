@@ -1,30 +1,36 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
+	import '../app.css';
+	import favicon from '$lib/assets/maria-cristina_simbolo_verde claro.svg';
 	import { supabase } from '$lib/supabaseClient';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
 	let { children } = $props();
-	let verificado = $state(false);
+	let estaNoLogin = $derived($page.url.pathname === '/login');
+	let pronto = $state(false);
 
 	onMount(async () => {
+		if (estaNoLogin) {
+			pronto = true;
+			return;
+		}
+
 		const { data } = await supabase.auth.getSession();
 
-		const estaNoLogin = $page.url.pathname === '/login';
-
-		if (!data.session && !estaNoLogin) {
+		if (!data.session) {
 			goto('/login');
 		} else {
-			verificado = true;
+			pronto = true;
 		}
 	});
+
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-{#if verificado}
+{#if estaNoLogin || pronto}
 	{@render children()}
 {/if}

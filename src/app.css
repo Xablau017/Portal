@@ -1,0 +1,37 @@
+:root {
+	--azul-pleno:     #1A2C42;  /* cor institucional principal (navy) */
+	--verde-heritage: #275248;  /* verde institucional */
+	--verde-apoio:    #97B9A3;  /* verde claro de apoio */
+	--ouro-legado:    #D5B038;  /* dourado — só para acentos */
+
+	--fundo:          #ffffff;
+	--texto:          #1A2C42;  /* texto usa o azul institucional */
+	--texto-suave:    #55636f;
+	--borda:          #e2e6ea;
+}
+
+body {
+	font-family: 'Lato', system-ui, sans-serif;
+	color: var(--texto);
+	background: var(--fundo);
+}
+h1, h2, h3 {
+	font-family: 'Cormorant Garamond', Georgia, serif;
+	color: var(--azul-pleno);
+	font-weight: 600;
+}
+
+button {
+	background: var(--azul-pleno);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 12px 20px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background .2s;
+}
+button:hover { background: var(--verde-heritage); }
+/* botão de destaque, com o ouro como acento: */
+button.destaque { background: var(--ouro-legado); }
