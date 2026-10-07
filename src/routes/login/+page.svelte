@@ -28,6 +28,15 @@ async function fazerLogin() {
     } else {
         goto('/')
     }
+
+const { data: userData } = await supabase.auth.getUser();
+	if (userData.user) {
+		await supabase.from('access_log').insert({
+			user_id: userData.user.id,
+			email: userData.user.email,
+			evento: 'login'
+	});
+}
 }
 </script>
 
