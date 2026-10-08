@@ -33,7 +33,9 @@
 <main class="home">
     <header class="topo">
         <div class="marca">Portal GMC</div>
+        {#if role === 'admin'}<a href="/admin">Administração</a>{/if}
         <div class="usuario">
+        <a href="/perfil"> perfil </a>
             {#if email}<span>{email}</span>{/if}
             {#if role}<span class="badge">{role}</span>{/if}
         <button onclick={sair}> Sair </button>
