@@ -60,9 +60,9 @@ const { data: userData } = await supabase.auth.getUser();
         autocomplete="current-password"
     />
 
-    <button onclick={fazerLogin} disabled={carregando}>
-        {carregando ? 'Entrando...' : 'Entrar'}
-    </button>
+	<form class="login" onsubmit={(e) => { e.preventDefault(); fazerLogin(); }}>
+		<button type="submit" disabled={carregando}>Entrar</button>
+	</form>
 
     {#if erro}
         <p class="erro">{erro}</p>
